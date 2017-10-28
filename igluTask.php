@@ -27,6 +27,14 @@
 
 		public function searchTicket(){
 
+
+			// Check HTTP Request, it should be GET only
+			if($this->get_request_method() != "GET")
+			{
+				$error = array('status' => "failed", "msg" => "Not allowed" , "data"=>"");
+				$this->response(json_encode($error),406);
+			}
+
 			// Create the object of helpers
 			$res = new REST();
 			$db = new Database();
